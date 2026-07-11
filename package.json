@@ -1,0 +1,47 @@
+{
+  "name": "multi-place-route-decision-tool",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n server,web \"npm:dev:server\" \"npm:dev:web\"",
+    "dev:web": "vite --config frontend/vite.config.ts --host 127.0.0.1",
+    "dev:server": "tsx watch server/src/index.ts",
+    "build": "npm run build:frontend && npm run build:server",
+    "build:frontend": "tsc -p tsconfig.app.json && vite build --config frontend/vite.config.ts",
+    "build:server": "npm run clean:server && tsc -p server/tsconfig.json",
+    "clean:server": "node -e \"fs.rmSync('server/dist',{recursive:true,force:true})\"",
+    "start:server": "node server/dist/index.js",
+    "lint": "eslint .",
+    "test": "tsx server/src/core/permutations.test.ts && tsx server/src/services/recommendationService.test.ts",
+    "api:smoke": "tsx scripts/api-smoke-v1.ts"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "concurrently": "^10.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "lucide-react": "^1.14.0",
+    "pg": "^8.22.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "tsx": "^4.22.4",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.12.2",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.2.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.5.0",
+    "typescript-eslint": "^8.58.2"
+  }
+}

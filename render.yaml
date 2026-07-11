@@ -1,0 +1,23 @@
+﻿services:
+  - type: web
+    name: route-decision-api
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build:server
+    startCommand: npm run start:server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 8787
+      - key: CORS_ORIGIN
+        sync: false
+      - key: AMAP_SERVICE_KEY
+        sync: false
+      - key: DIDI_MCP_KEY
+        sync: false
+      - key: DIDI_MCP_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
